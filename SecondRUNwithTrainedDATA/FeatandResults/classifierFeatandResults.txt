@@ -1,0 +1,43 @@
+		line["lunghezza"] = len(element["clean_lemma"].split(" ")) --> Lunghezza della query (In termini di numero di tokens)
+		line["question_mark"] = element["query"].count('?') --> Numero di punti interrogativi nella query
+		line["emptywords"] = len(element["query"]) - len(element["clean_lemma"]) --> Numero di "parole vuote"
+		pal = element["pos_and_lemma"]
+		line["verbNumber"] = getPOS(pal, "ver") --> Numero di verbi nella query
+		line["noun"] = getPOS(pal, "noun") --> Numero di nomi delle query
+		line["advNumber"] = getPOS(pal, "adv") --> Numero di avverbi nelle query
+		line["adjNumber"] = getPOS(pal, "adj") --> Numero di aggettivi nelle query
+		line["noCatpercent"] = round(getPOS(pal, "nocat") * 1.0 / len(element["query"]) * 1.0, 3) --> Percentuale di nocat per query
+		creaTTR(line, element["clean_lemma"]) --> Funzione che calcola la Type/Token Ratio 
+		cercaFrequentWords(line, element["clean_lemma"], most_frequent_words) --> Funzione che ricerca all'interno della query le parole più frequenti per ogni categoria, calcolate e caricate in una lista in precedenza
+		freqWordsWeight(line, element["clean_lemma"], most_frequent_words,len(element["clean_lemma"].split(" "))) --> Funzione che calcola il peso che hanno, all'interno della query, le parole più frequenti per ogni categoria, calcolate e caricate in una lista in precedenza
+		cercaBigrammi(line, element["clean_lemma"], most_frequent_bigrams) --> Funzione che ricerca all'interno della query le coppie di parole (bigrammi) più frequenti per ogni categoria, calcolate e caricate in una lista in precedenza
+		freqBigramsWeight(line, element["clean_lemma"], most_frequent_bigrams,len(b1)) --> Funzione che calcola il peso che hanno, all'interno della query, i bigrammi più frequenti per ogni categoria, calcolate e caricate in una lista in precedenza
+
+
+
+
+
+CLASSIFIER ACCURACY:
+Final accuracy: 0.904244817374
+P/R/F1 Final micro: (0.90249724918564989, 0.90268004352968301, 0.9025268301735071, None)
+P/R/F1 Final macro: (0.9042448173741362, 0.9042448173741362, 0.9042448173741362, None)
+
+Normalized confusion matrix
+[[ 0.86  0.09  0.05]
+ [ 0.06  0.92  0.02]
+ [ 0.06  0.01  0.93]]
+
+Features that discriminates the most, for each category:
+
+FAQ Bigrams 0.711234329267 --> Presenza dei bigrammi più frequenti per categoria
+FAQ Unigrams 0.632292986225 --> Presenza degli unigrammi più frequenti per categoria
+
+Prodotto Bigrams 0.467692203944  --> Presenza dei bigrammi più frequenti per categoria
+Prodotto Unigrams 0.955495654878 --> Presenza degli unigrammi più frequenti per categoria
+Prodotto WordsWeight 0.238422387971 --> Peso degli unigrammi più frequenti per categoria
+
+
+OrdiniAccountPersonali advNumber 0.140001878015 --> Numero di avverbi nelle queries
+OrdiniAccountPersonali bigramsWeight 0.217611031545 --> Peso dei bigrammi più frequenti per categoria
+OrdiniAccountPersonali Bigrams 0.76368123749 --> Presenza dei bigrammi più frequenti per categoria
+OrdiniAccountPersonali Unigrams 0.466088596683 --> Presenza degli unigrammi più frequenti per categoria
